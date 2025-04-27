@@ -10,7 +10,6 @@ def find_difference(numbers):
     """
     if not numbers:
         return 0
-
     smallest = min(numbers)
     largest = max(numbers)
     return largest - smallest
