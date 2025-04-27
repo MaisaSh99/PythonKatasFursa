@@ -1,3 +1,6 @@
+from curses.ascii import isspace
+
+
 def count_words(sentence):
     """
     Counts the number of words in a given sentence.
@@ -8,7 +11,8 @@ def count_words(sentence):
     Returns:
         the number of words in the sentence
     """
-    return 0
+    words = sentence.split()
+    return len(words)
 
 
 if __name__ == '__main__':
