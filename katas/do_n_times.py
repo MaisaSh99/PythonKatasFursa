@@ -6,6 +6,10 @@ def do_n_times(func, n):
         func: the function to execute
         n: the number of times to execute the function
     """
+    i = 0
+    while i < n:
+        func()
+        i += 1
     pass
 
 
