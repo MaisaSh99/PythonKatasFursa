@@ -8,6 +8,15 @@ def is_unique(string):
     Returns:
         True if all characters are unique, False otherwise
     """
+    string = string.replace(" ", "")
+
+    seen = set()
+
+    for c in string:
+        if c in seen:
+            return False
+        seen.add(c)
+
     return True
 
 
