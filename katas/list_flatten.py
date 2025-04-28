@@ -9,7 +9,15 @@ def flatten_list(nested_list):
         a flat list containing all integers from the nested structure
     """
     # hint: isinstance()
-    return []
+    flat_list = []
+
+    for i in nested_list:
+        if isinstance(i, list):
+            flat_list.extend(flatten_list(i))
+        elif isinstance(i, int):
+            flat_list.append(i)
+
+    return flat_list
 
 
 if __name__ == '__main__':
