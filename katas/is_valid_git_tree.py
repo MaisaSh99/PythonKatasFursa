@@ -1,5 +1,3 @@
-from sympy import false
-
 
 def is_valid_git_tree(tree_map):
     """
@@ -23,7 +21,7 @@ def is_valid_git_tree(tree_map):
     child_nodes = set(child for children in tree_map.values() for child in children)
     root_candidates = all_nodes - child_nodes
     if len(root_candidates) != 1:
-        return false
+        return False
 
     root = root_candidates.pop()
     visited = set()
@@ -42,7 +40,7 @@ def is_valid_git_tree(tree_map):
                 return True
         stack.remove(node)
         return False
-        
+
     if dfs(root):
         return False
 
