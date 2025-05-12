@@ -1,3 +1,6 @@
+from sympy import false
+
+
 def is_valid_git_tree(tree_map):
     """
     Determines if a given tree structure represents a valid Git tree.
@@ -12,7 +15,38 @@ def is_valid_git_tree(tree_map):
     Returns:
         True if the tree is a valid Git tree, False otherwise
     """
-    return False
+
+    if not tree_map:
+        return False
+
+    all_nodes = set(tree_map.keys())
+    child_nodes = set(child for children in tree_map.values() for child in children)
+    root_candidates = all_nodes - child_nodes
+    if len(root_candidates) != 1:
+        return false
+
+    root = root_candidates.pop()
+    visited = set()
+    stack = set()
+
+    def dfs(node):
+        if node in stack:
+            return True
+        if node in visited:
+            return False
+
+        visited.add(node)
+        stack.add(node)
+        for child in tree_map.get(node, []):
+            if dfs(child):
+                return True
+        stack.remove(node)
+        return False
+        
+    if dfs(root):
+        return False
+
+    return visited == all_nodes
 
 
 if __name__ == '__main__':
