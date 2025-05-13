@@ -1,4 +1,5 @@
-from typing import List
+from itertools import combinations
+from typing import List, Set
 
 
 def select_minimal_test_cases(test_cases: List[List[int]]) -> List[int]:
@@ -24,6 +25,19 @@ def select_minimal_test_cases(test_cases: List[List[int]]) -> List[int]:
     Returns:
         A list of indices of the minimal subset of test cases that covers all requirements
     """
+
+    test_case_sets: List[Set[int]] = [set(case) for case in test_cases]
+    all_requirements = set(req for case in test_case_sets for req in case)
+    n = len(test_cases)
+
+    for size in range(1, n + 1):
+        for indices in combinations(range(n), size):
+            combined = set()
+            for i in indices:
+                combined.update(test_case_sets[i])
+            if combined == all_requirements:
+                return list(indices)
+
     return []
 
 
