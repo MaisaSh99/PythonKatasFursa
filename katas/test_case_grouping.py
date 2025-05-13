@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 def group_test_cases(test_case_group_sizes):
     """
     Groups test cases based on their specified group sizes.
@@ -31,7 +34,16 @@ def group_test_cases(test_case_group_sizes):
         a list of lists, where each inner list contains the indices of test cases
         that are grouped together
     """
-    return []
+    size_to_indices = defaultdict(list)
+    result = []
+
+    for idx, size in enumerate(test_case_group_sizes):
+        size_to_indices[size].append(idx)
+        if len(size_to_indices[size]) == size:
+            result.append(size_to_indices[size])
+            size_to_indices[size] = []
+
+    return result
 
 
 if __name__ == '__main__':
